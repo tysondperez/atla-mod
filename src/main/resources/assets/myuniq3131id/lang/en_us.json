@@ -1,5 +1,14 @@
 {
   "item.myuniq3131id.sapphire": "Sapphire",
   "item.myuniq3131id.raw_sapphire": "Raw Sapphire",
-  "creativetab.tutorial_tab": "Sapphire Tutorial Tab"
+
+  "block.myuniq3131id.sapphire_block": "Block of Sapphire",
+  "block.myuniq3131id.raw_sapphire_block": "Block of Raw Sapphire",
+
+  "creativetab.tutorial_tab": "Sapphire Tutorial Tab",
+
+  "block.myuniq3131id.sapphire_ore": "Sapphire Ore",
+  "block.myuniq3131id.deepslate_sapphire_ore": "Deepslate Sapphire Ore",
+  "block.myuniq3131id.nether_sapphire_ore": "Nether Sapphire Ore",
+  "block.myuniq3131id.end_stone_sapphire_ore": "Endstone Sapphire Ore"
 }
