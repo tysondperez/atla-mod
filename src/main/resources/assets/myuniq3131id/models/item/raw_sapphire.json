@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "myuniq3131id:item/raw_sapphire"
+  }
+}
