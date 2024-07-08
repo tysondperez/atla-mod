@@ -13,6 +13,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.tysondperez.tutorialmod.TutorialMod;
+import net.tysondperez.tutorialmod.block.custom.SoundBlock;
 import net.tysondperez.tutorialmod.item.ModItems;
 
 import java.util.function.Supplier;
@@ -46,6 +47,9 @@ public class ModBlocks {
             ()-> new DropExperienceBlock(UniformInt.of(3, 7),
                     BlockBehaviour.Properties.ofFullCopy(Blocks.END_STONE).strength(5f)
                             .requiresCorrectToolForDrops()));
+
+    public static final RegistryObject<Block> SOUND_BLOCK = registerBlock("sound_block",
+            ()-> new SoundBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.NOTE_BLOCK)));
 
 
 
