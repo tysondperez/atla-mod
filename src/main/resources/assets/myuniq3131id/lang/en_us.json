@@ -4,12 +4,18 @@
 
   "item.myuniq3131id.metal_detector": "Metal Detector",
 
+  "item.myuniq3131id.strawberry": "Strawberry",
+
+  "item.myuniq3131id.pine_cone": "Pine Cone",
+
   "block.myuniq3131id.sound_block": "Sound Block",
 
   "block.myuniq3131id.sapphire_block": "Block of Sapphire",
   "block.myuniq3131id.raw_sapphire_block": "Block of Raw Sapphire",
 
   "creativetab.tutorial_tab": "Sapphire Tutorial Tab",
+
+  "tooltip.myuniq3131id.metal_detector.tooltip": "Finds valuables underground!",
 
   "block.myuniq3131id.sapphire_ore": "Sapphire Ore",
   "block.myuniq3131id.deepslate_sapphire_ore": "Deepslate Sapphire Ore",
