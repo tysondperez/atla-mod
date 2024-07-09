@@ -1,0 +1,4 @@
+// 1.20.6	2024-07-08T16:58:40.7336575	Tags for minecraft:block mod id myuniq3131id
+8911968a628cb1df8cdad64df47519f28decf73a data/minecraft/tags/blocks/mineable/pickaxe.json
+443b58b924ebf09f2998569c32bcf8ded81111a7 data/minecraft/tags/blocks/needs_stone_tool.json
+2183e01b57283a780a0500db2eaa5d7df8e92513 data/myuniq3131id/tags/blocks/metal_detector_valuables.json

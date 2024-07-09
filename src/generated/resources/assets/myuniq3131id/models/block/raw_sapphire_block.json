@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "myuniq3131id:block/raw_sapphire_block"
+  }
+}
