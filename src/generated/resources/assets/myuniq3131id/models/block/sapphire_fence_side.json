@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_side",
+  "textures": {
+    "texture": "myuniq3131id:block/sapphire_block"
+  }
+}

@@ -13,6 +13,16 @@
   "block.myuniq3131id.sapphire_block": "Block of Sapphire",
   "block.myuniq3131id.raw_sapphire_block": "Block of Raw Sapphire",
 
+  "block.myuniq3131id.sapphire_stairs": "Sapphire Stairs",
+  "block.myuniq3131id.sapphire_slab": "Sapphire Slab",
+  "block.myuniq3131id.sapphire_button": "Sapphire Button",
+  "block.myuniq3131id.sapphire_pressure_plate": "Sapphire Pressure Plate",
+  "block.myuniq3131id.sapphire_fence": "Sapphire Fence",
+  "block.myuniq3131id.sapphire_fence_gate": "Sapphire Fence Gate",
+  "block.myuniq3131id.sapphire_wall": "Sapphire Wall",
+  "block.myuniq3131id.sapphire_door": "Sapphire Door",
+  "block.myuniq3131id.sapphire_trapdoor": "Sapphire Trapdoor",
+
   "creativetab.tutorial_tab": "Sapphire Tutorial Tab",
 
   "tooltip.myuniq3131id.metal_detector.tooltip": "Finds valuables underground!",

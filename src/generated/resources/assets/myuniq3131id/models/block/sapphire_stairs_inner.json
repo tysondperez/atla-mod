@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "myuniq3131id:block/sapphire_block",
+    "side": "myuniq3131id:block/sapphire_block",
+    "top": "myuniq3131id:block/sapphire_block"
+  }
+}

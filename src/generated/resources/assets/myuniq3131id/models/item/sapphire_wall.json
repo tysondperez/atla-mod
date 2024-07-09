@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "myuniq3131id:block/sapphire_block"
+  }
+}

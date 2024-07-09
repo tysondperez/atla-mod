@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button_pressed",
+  "textures": {
+    "texture": "myuniq3131id:block/sapphire_block"
+  }
+}
