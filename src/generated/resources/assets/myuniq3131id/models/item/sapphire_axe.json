@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "myuniq3131id:item/sapphire_axe"
+  }
+}
