@@ -1,10 +1,15 @@
 package net.tysondperez.tutorialmod.item;
 
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.RegistryObject;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 import net.tysondperez.tutorialmod.TutorialMod;
 import net.tysondperez.tutorialmod.item.custom.FuelItem;
 import net.tysondperez.tutorialmod.item.custom.MetalDetectorItem;
@@ -49,6 +54,19 @@ public class ModItems {
     public static final RegistryObject<Item>SAPPHIRE_HOE = ITEMS.register("sapphire_hoe",
             () -> new HoeItem(Tiers.DIAMOND, new Item.Properties()
                     .attributes(HoeItem.createAttributes(Tiers.DIAMOND, -3.0F, 0.0F)))
+    );
+
+    public static final RegistryObject<Item> SAPPHIRE_HELMET = ITEMS.register("sapphire_helmet", 
+            () -> new ArmorItem(ArmorMaterials.DIAMOND, ArmorItem.Type.HELMET, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(5)))
+    );
+    public static final RegistryObject<Item> SAPPHIRE_CHESTPLATE = ITEMS.register("sapphire_chestplate",
+            () -> new ArmorItem(ArmorMaterials.DIAMOND, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(5)))
+    );
+    public static final RegistryObject<Item> SAPPHIRE_LEGGINGS = ITEMS.register("sapphire_leggings",
+            () -> new ArmorItem(ArmorMaterials.DIAMOND, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(5)))
+    );
+    public static final RegistryObject<Item> SAPPHIRE_BOOTS = ITEMS.register("sapphire_boots",
+            () -> new ArmorItem(ArmorMaterials.DIAMOND, ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(5)))
     );
 
     public static final RegistryObject<Item> PINE_CONE = ITEMS.register("pine_cone",
