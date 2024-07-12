@@ -7,7 +7,5 @@
   "ingredient": {
     "item": "myuniq3131id:deepslate_sapphire_ore"
   },
-  "result": {
-    "id": "myuniq3131id:sapphire"
-  }
+  "result": "myuniq3131id:sapphire"
 }

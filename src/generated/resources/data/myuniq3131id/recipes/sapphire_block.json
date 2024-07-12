@@ -2,17 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
+    "S": {
       "item": "myuniq3131id:sapphire"
     }
   },
   "pattern": [
-    "###",
-    "###",
-    "###"
+    "SSS",
+    "SSS",
+    "SSS"
   ],
   "result": {
-    "count": 1,
-    "id": "myuniq3131id:sapphire_block"
-  }
+    "item": "myuniq3131id:sapphire_block"
+  },
+  "show_notification": true
 }

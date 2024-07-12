@@ -1,11 +1,7 @@
 package net.tysondperez.tutorialmod.item;
 
-import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraftforge.fml.common.Mod;
+
 import net.minecraftforge.registries.RegistryObject;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -13,6 +9,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.tysondperez.tutorialmod.TutorialMod;
 import net.tysondperez.tutorialmod.item.custom.FuelItem;
 import net.tysondperez.tutorialmod.item.custom.MetalDetectorItem;
+import net.tysondperez.tutorialmod.item.custom.ModArmorItem;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
@@ -36,38 +33,24 @@ public class ModItems {
 
 
     public static final RegistryObject<Item> SAPPHIRE_SWORD = ITEMS.register("sapphire_sword",
-            () -> new SwordItem(Tiers.DIAMOND, new Item.Properties()
-                    .attributes(SwordItem.createAttributes(Tiers.DIAMOND, 3, -1.6F)))
-    );
-    public static final RegistryObject<Item>SAPPHIRE_SHOVEL = ITEMS.register("sapphire_shovel", 
-            () -> new ShovelItem(Tiers.DIAMOND, new Item.Properties()
-                    .attributes(ShovelItem.createAttributes(Tiers.DIAMOND, 1.5F, -3.0F)))
-    );
-    public static final RegistryObject<Item>SAPPHIRE_PICKAXE = ITEMS.register("sapphire_pickaxe",
-            () -> new PickaxeItem(Tiers.DIAMOND, new Item.Properties()
-                    .attributes(PickaxeItem.createAttributes(Tiers.DIAMOND, 1.0F, -2.8F)))
-    );
-    public static final RegistryObject<Item>SAPPHIRE_AXE = ITEMS.register("sapphire_axe",
-            () -> new AxeItem(Tiers.DIAMOND, new Item.Properties()
-                    .attributes(AxeItem.createAttributes(Tiers.DIAMOND, 5.0F, -2.6F)))
-    );
-    public static final RegistryObject<Item>SAPPHIRE_HOE = ITEMS.register("sapphire_hoe",
-            () -> new HoeItem(Tiers.DIAMOND, new Item.Properties()
-                    .attributes(HoeItem.createAttributes(Tiers.DIAMOND, -3.0F, 0.0F)))
-    );
+            () -> new SwordItem(ModToolTiers.SAPPHIRE, 4, 2, new Item.Properties()));
+    public static final RegistryObject<Item> SAPPHIRE_PICKAXE = ITEMS.register("sapphire_pickaxe",
+            () -> new PickaxeItem(ModToolTiers.SAPPHIRE, 1, 1, new Item.Properties()));
+    public static final RegistryObject<Item> SAPPHIRE_AXE = ITEMS.register("sapphire_axe",
+            () -> new AxeItem(ModToolTiers.SAPPHIRE, 7, 1, new Item.Properties()));
+    public static final RegistryObject<Item> SAPPHIRE_SHOVEL = ITEMS.register("sapphire_shovel",
+            () -> new ShovelItem(ModToolTiers.SAPPHIRE, 0, 0, new Item.Properties()));
+    public static final RegistryObject<Item> SAPPHIRE_HOE = ITEMS.register("sapphire_hoe",
+            () -> new HoeItem(ModToolTiers.SAPPHIRE, 0, 0, new Item.Properties()));
 
-    public static final RegistryObject<Item> SAPPHIRE_HELMET = ITEMS.register("sapphire_helmet", 
-            () -> new ArmorItem(ArmorMaterials.DIAMOND, ArmorItem.Type.HELMET, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(5)))
-    );
+    public static final RegistryObject<Item> SAPPHIRE_HELMET = ITEMS.register("sapphire_helmet",
+            () -> new ModArmorItem(ModArmorMaterials.SAPPHIRE, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> SAPPHIRE_CHESTPLATE = ITEMS.register("sapphire_chestplate",
-            () -> new ArmorItem(ArmorMaterials.DIAMOND, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(5)))
-    );
+            () -> new ArmorItem(ModArmorMaterials.SAPPHIRE, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
     public static final RegistryObject<Item> SAPPHIRE_LEGGINGS = ITEMS.register("sapphire_leggings",
-            () -> new ArmorItem(ArmorMaterials.DIAMOND, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(5)))
-    );
+            () -> new ArmorItem(ModArmorMaterials.SAPPHIRE, ArmorItem.Type.LEGGINGS, new Item.Properties()));
     public static final RegistryObject<Item> SAPPHIRE_BOOTS = ITEMS.register("sapphire_boots",
-            () -> new ArmorItem(ArmorMaterials.DIAMOND, ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(5)))
-    );
+            () -> new ArmorItem(ModArmorMaterials.SAPPHIRE, ArmorItem.Type.BOOTS, new Item.Properties()));
 
     public static final RegistryObject<Item> PINE_CONE = ITEMS.register("pine_cone",
             () -> new FuelItem(new Item.Properties(), 400));

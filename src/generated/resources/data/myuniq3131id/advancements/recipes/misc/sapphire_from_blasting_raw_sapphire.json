@@ -5,7 +5,9 @@
       "conditions": {
         "items": [
           {
-            "items": "myuniq3131id:raw_sapphire"
+            "items": [
+              "myuniq3131id:raw_sapphire"
+            ]
           }
         ]
       },
@@ -20,13 +22,14 @@
   },
   "requirements": [
     [
-      "has_the_recipe",
-      "has_raw_sapphire"
+      "has_raw_sapphire",
+      "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
       "myuniq3131id:sapphire_from_blasting_raw_sapphire"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

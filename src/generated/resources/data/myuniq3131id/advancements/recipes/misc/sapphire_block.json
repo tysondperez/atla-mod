@@ -5,7 +5,9 @@
       "conditions": {
         "items": [
           {
-            "items": "myuniq3131id:sapphire"
+            "items": [
+              "myuniq3131id:sapphire"
+            ]
           }
         ]
       },
@@ -20,13 +22,14 @@
   },
   "requirements": [
     [
-      "has_the_recipe",
-      "has_sapphire"
+      "has_sapphire",
+      "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
       "myuniq3131id:sapphire_block"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }
