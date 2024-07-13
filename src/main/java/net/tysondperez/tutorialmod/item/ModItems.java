@@ -1,6 +1,8 @@
 package net.tysondperez.tutorialmod.item;
 
 
+import net.minecraft.world.entity.monster.Ghast;
+import net.minecraft.world.entity.projectile.SmallFireball;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -10,6 +12,7 @@ import net.tysondperez.tutorialmod.TutorialMod;
 import net.tysondperez.tutorialmod.item.custom.FuelItem;
 import net.tysondperez.tutorialmod.item.custom.MetalDetectorItem;
 import net.tysondperez.tutorialmod.item.custom.ModArmorItem;
+import net.tysondperez.tutorialmod.item.custom.SapphireStaffItem;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
@@ -28,7 +31,7 @@ public class ModItems {
             () -> new Item(new Item.Properties().food(ModFoods.STRAWBERRY)));
 
     public static final RegistryObject<Item> SAPPHIRE_STAFF = ITEMS.register("sapphire_staff",
-            () -> new Item(new Item.Properties().stacksTo(1)));
+            () -> new SapphireStaffItem(new Item.Properties().durability(100)));
 
 
 

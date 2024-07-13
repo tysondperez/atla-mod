@@ -1,6 +1,7 @@
 package net.tysondperez.tutorialmod.item.custom;
 
 import com.google.common.collect.ImmutableMap;
+import net.minecraft.sounds.SoundEvent;
 import net.tysondperez.tutorialmod.item.ModArmorMaterials;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
