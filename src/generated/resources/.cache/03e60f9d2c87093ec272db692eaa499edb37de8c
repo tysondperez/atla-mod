@@ -1,0 +1,5 @@
+// 1.20.1	2024-07-13T19:45:55.8565066	Global Loot Modifiers : myuniq3131id
+80810e6b2d082131e76e40fe4cc3ba04a7f13912 data/forge/loot_modifiers/global_loot_modifiers.json
+bffbbdb1490d282a802b8a5c8384ce65a364d3fd data/myuniq3131id/loot_modifiers/metal_detector_from_jungle_temples.json
+2134cb2b207925a594a381e6c1e11cc58be274a2 data/myuniq3131id/loot_modifiers/pine_cone_from_creeper.json
+fed07fc6fd29bb64c4d27aae83f10b49ece8275c data/myuniq3131id/loot_modifiers/pine_cone_from_grass.json
