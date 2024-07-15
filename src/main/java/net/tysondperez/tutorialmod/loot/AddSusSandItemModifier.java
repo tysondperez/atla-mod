@@ -16,29 +16,25 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Supplier;
 
 public class AddSusSandItemModifier extends LootModifier {
-
     public static final Supplier<Codec<AddSusSandItemModifier>> CODEC = Suppliers.memoize(()
             -> RecordCodecBuilder.create(inst -> codecStart(inst).and(ForgeRegistries.ITEMS.getCodec()
             .fieldOf("item").forGetter(m -> m.item)).apply(inst, AddSusSandItemModifier::new)));
     private final Item item;
-
 
     public AddSusSandItemModifier(LootItemCondition[] conditionsIn, Item item) {
         super(conditionsIn);
         this.item = item;
     }
 
-
     @Override
-    protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext lootContext) {
-
-        for(LootItemCondition condition : this.conditions){
-            if (!condition.test(lootContext)){
+    protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
+        for(LootItemCondition condition : this.conditions) {
+            if(!condition.test(context)) {
                 return generatedLoot;
             }
         }
 
-        if (lootContext.getRandom().nextFloat() < .99f) { //too high
+        if(context.getRandom().nextFloat() < 0.5f) { // 50% WAY TOO HIGH!
             generatedLoot.clear();
             generatedLoot.add(new ItemStack(this.item));
         }

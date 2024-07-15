@@ -3,7 +3,7 @@
   "conditions": [
     {
       "condition": "forge:loot_table_id",
-      "loot_table_id": "minecraft:archaeology/desert_temple"
+      "loot_table_id": "minecraft:archaeology/desert_pyramid"
     }
   ],
   "item": "myuniq3131id:metal_detector"
