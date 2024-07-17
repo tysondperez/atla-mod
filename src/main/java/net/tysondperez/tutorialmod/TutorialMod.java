@@ -2,6 +2,7 @@ package net.tysondperez.tutorialmod;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -51,7 +52,11 @@ public class TutorialMod
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
-
+        event.enqueueWork(() -> {
+            // Add strawberry seeds to the composter with a 30% chance
+            ComposterBlock.COMPOSTABLES.put(ModItems.STRAWBERRY_SEEDS.get(), 0.3f);
+            ComposterBlock.COMPOSTABLES.put(ModItems.STRAWBERRY.get(), 0.65f);
+        });
     }
 
     // Add the example block item to the building blocks tab
