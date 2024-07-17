@@ -34,7 +34,7 @@ public class AddSusSandItemModifier extends LootModifier {
             }
         }
 
-        if(context.getRandom().nextFloat() < 0.5f) { // 50% WAY TOO HIGH!
+        if(context.getRandom().nextFloat() < 0.15f) { // 50% WAY TOO HIGH!
             generatedLoot.clear();
             generatedLoot.add(new ItemStack(this.item));
         }

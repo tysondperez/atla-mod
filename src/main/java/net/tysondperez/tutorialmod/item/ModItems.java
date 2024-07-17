@@ -9,6 +9,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.tysondperez.tutorialmod.TutorialMod;
+import net.tysondperez.tutorialmod.block.ModBlocks;
 import net.tysondperez.tutorialmod.item.custom.FuelItem;
 import net.tysondperez.tutorialmod.item.custom.MetalDetectorItem;
 import net.tysondperez.tutorialmod.item.custom.ModArmorItem;
@@ -57,6 +58,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> PINE_CONE = ITEMS.register("pine_cone",
             () -> new FuelItem(new Item.Properties(), 400));
+
+    public static final RegistryObject<Item> STRAWBERRY_SEEDS = ITEMS.register("strawberry_seeds",
+            () -> new ItemNameBlockItem(ModBlocks.STRAWBERRY_CROP.get(), new Item.Properties()));
 
 
     public static void register(IEventBus eventBus) {
