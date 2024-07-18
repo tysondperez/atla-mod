@@ -56,6 +56,9 @@ public class TutorialMod
             // Add strawberry seeds to the composter with a 30% chance
             ComposterBlock.COMPOSTABLES.put(ModItems.STRAWBERRY_SEEDS.get(), 0.3f);
             ComposterBlock.COMPOSTABLES.put(ModItems.STRAWBERRY.get(), 0.65f);
+
+            ComposterBlock.COMPOSTABLES.put(ModItems.CORN_SEEDS.get(), 0.3f);
+            ComposterBlock.COMPOSTABLES.put(ModItems.CORN.get(), 0.65f);
         });
     }
 

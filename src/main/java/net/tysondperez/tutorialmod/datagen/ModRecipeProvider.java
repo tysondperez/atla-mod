@@ -1,5 +1,7 @@
 package net.tysondperez.tutorialmod.datagen;
 
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 import net.tysondperez.tutorialmod.TutorialMod;
 import net.tysondperez.tutorialmod.block.ModBlocks;
 import net.tysondperez.tutorialmod.item.ModItems;
@@ -36,7 +38,15 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("SSS")
                 .define('S', ModItems.SAPPHIRE.get())
                 .unlockedBy(getHasName(ModItems.SAPPHIRE.get()), has(ModItems.SAPPHIRE.get()))
-                .save(pWriter);
+                .save(pWriter, new ResourceLocation("myuniq3131id", "sapphire_block_from_sapphire"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.SAPPHIRE_BLOCK.get() /*result of the recipe*/) // Shaped Recipe
+                .pattern("FFF") // {
+                .pattern("FFF") //   pattern of recipe
+                .pattern("FFF") // }
+                .define('F', Items.STICK) // keys
+                .unlockedBy(getHasName(Items.STICK), has(Items.STICK)) // what item unlocks this recipe in the recipe book
+                .save(pWriter, new ResourceLocation("myuniq3131id", "sapphire_block_from_sticks"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.SAPPHIRE.get(), 9)
                 .requires(ModBlocks.SAPPHIRE_BLOCK.get())

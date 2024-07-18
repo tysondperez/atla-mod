@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "myuniq3131id:sapphire_block"
+        "recipe": "myuniq3131id:sapphire_block_from_sapphire"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "myuniq3131id:sapphire_block"
+      "myuniq3131id:sapphire_block_from_sapphire"
     ]
   },
   "sends_telemetry_event": false
