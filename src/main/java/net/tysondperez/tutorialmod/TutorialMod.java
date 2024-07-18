@@ -2,7 +2,9 @@ package net.tysondperez.tutorialmod;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
+import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -59,6 +61,8 @@ public class TutorialMod
 
             ComposterBlock.COMPOSTABLES.put(ModItems.CORN_SEEDS.get(), 0.3f);
             ComposterBlock.COMPOSTABLES.put(ModItems.CORN.get(), 0.65f);
+
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.CATMINT.getId(), ModBlocks.POTTED_CATMINT);
         });
     }
 
