@@ -1,5 +1,8 @@
 package net.tysondperez.tutorialmod.item.custom;
 
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.tysondperez.tutorialmod.sound.ModSounds;
 import net.tysondperez.tutorialmod.util.ModTags;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
@@ -35,6 +38,10 @@ public class MetalDetectorItem extends Item {
                 if (isValuableBlock(state)) {
                     outputValuableCoordinates(positionClicked.below(i), player, state.getBlock());
                     foundBlock = true;
+
+                    pContext.getLevel().playSeededSound(null, positionClicked.getX(), positionClicked.getY(),
+                            positionClicked.getZ(), ModSounds.METAL_DETECTOR_FOUND_ORE.get(), SoundSource.BLOCKS,
+                            1f, 1f, 0);
 
                     break;
                 }

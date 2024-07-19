@@ -19,6 +19,7 @@ import net.tysondperez.tutorialmod.block.ModBlocks;
 import net.tysondperez.tutorialmod.item.ModCreativeModeTabs;
 import net.tysondperez.tutorialmod.item.ModItems;
 import net.tysondperez.tutorialmod.loot.ModLootModifiers;
+import net.tysondperez.tutorialmod.sound.ModSounds;
 import net.tysondperez.tutorialmod.villagers.ModVillagers;
 import org.slf4j.Logger;
 
@@ -42,6 +43,7 @@ public class TutorialMod
 
         ModLootModifiers.register(modEventBus);
         ModVillagers.register(modEventBus);
+        ModSounds.register(modEventBus);
 
 
         // Register the commonSetup method for modloading
