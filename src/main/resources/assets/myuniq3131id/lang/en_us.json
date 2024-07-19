@@ -45,6 +45,8 @@
 
   "tooltip.myuniq3131id.metal_detector.tooltip": "Finds valuables underground!",
 
+  "entity.minecraft.villager.myuniq3131id.sound_master": "Sound Master",
+
   "block.myuniq3131id.sapphire_ore": "Sapphire Ore",
   "block.myuniq3131id.deepslate_sapphire_ore": "Deepslate Sapphire Ore",
   "block.myuniq3131id.nether_sapphire_ore": "Nether Sapphire Ore",

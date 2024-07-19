@@ -19,6 +19,7 @@ import net.tysondperez.tutorialmod.block.ModBlocks;
 import net.tysondperez.tutorialmod.item.ModCreativeModeTabs;
 import net.tysondperez.tutorialmod.item.ModItems;
 import net.tysondperez.tutorialmod.loot.ModLootModifiers;
+import net.tysondperez.tutorialmod.villagers.ModVillagers;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -40,6 +41,7 @@ public class TutorialMod
         ModBlocks.register(modEventBus);
 
         ModLootModifiers.register(modEventBus);
+        ModVillagers.register(modEventBus);
 
 
         // Register the commonSetup method for modloading
