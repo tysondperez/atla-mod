@@ -14,6 +14,7 @@ import net.tysondperez.tutorialmod.item.custom.FuelItem;
 import net.tysondperez.tutorialmod.item.custom.MetalDetectorItem;
 import net.tysondperez.tutorialmod.item.custom.ModArmorItem;
 import net.tysondperez.tutorialmod.item.custom.SapphireStaffItem;
+import net.tysondperez.tutorialmod.sound.ModSounds;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
@@ -36,6 +37,9 @@ public class ModItems {
     public static final RegistryObject<Item> SAPPHIRE_STAFF = ITEMS.register("sapphire_staff",
             () -> new SapphireStaffItem(new Item.Properties().durability(100)));
 
+    public static final RegistryObject<Item> BAR_BRAWL_MUSIC_DISC = ITEMS.register("bar_brawl_music_disc",
+            () -> new RecordItem(6, ModSounds.BAR_BRAWL,
+                    new Item.Properties().stacksTo(1), 2440));
 
 
     public static final RegistryObject<Item> SAPPHIRE_SWORD = ITEMS.register("sapphire_sword",

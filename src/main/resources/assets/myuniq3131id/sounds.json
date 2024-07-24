@@ -34,5 +34,13 @@
     "sounds": [
       "myuniq3131id:sound_block_fall"
     ]
+  },
+  "bar_brawl": {
+    "sounds": [
+      {
+        "name": "myuniq3131id:bar_brawl",
+        "stream": true
+      }
+    ]
   }
 }
