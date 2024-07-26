@@ -12,7 +12,7 @@ import net.tysondperez.tutorialmod.entity.client.RhinoModel;
 @Mod.EventBusSubscriber(modid = TutorialMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModEventBusClientEvents {
     @SubscribeEvent
-    public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event){
+    public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(ModModelLayers.RHINO_LAYER, RhinoModel::createBodyLayer);
     }
 }

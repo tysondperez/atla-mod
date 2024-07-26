@@ -31,13 +31,15 @@ public class RhinoEntity extends Animal {
 
     @Override
     public void tick() {
-        if (this.level().isClientSide()){
+        super.tick();
+
+        if(this.level().isClientSide()) {
             setupAnimationStates();
         }
     }
 
-    private void setupAnimationStates(){
-        if (this.idleAnimationTimeout <= 0){
+    private void setupAnimationStates() {
+        if(this.idleAnimationTimeout <= 0) {
             this.idleAnimationTimeout = this.random.nextInt(40) + 80;
             this.idleAnimationState.start(this.tickCount);
         } else {
@@ -48,11 +50,12 @@ public class RhinoEntity extends Animal {
     @Override
     protected void updateWalkAnimation(float pPartialTick) {
         float f;
-        if (this.getPose() == Pose.STANDING){
-            f = Math.min(pPartialTick * 6f, 1f);
+        if(this.getPose() == Pose.STANDING) {
+            f = Math.min(pPartialTick * 6F, 1f);
         } else {
-            f = 0;
+            f = 0f;
         }
+
         this.walkAnimation.update(f, 0.2f);
     }
 
@@ -68,9 +71,10 @@ public class RhinoEntity extends Animal {
         this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 1.1D));
         this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 3f));
         this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
+
     }
 
-    public static AttributeSupplier.Builder createAttributes(){
+    public static AttributeSupplier.Builder createAttributes() {
         return Animal.createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 20D)
                 .add(Attributes.FOLLOW_RANGE, 24D)
@@ -82,8 +86,8 @@ public class RhinoEntity extends Animal {
 
     @Nullable
     @Override
-    public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-        return ModEntities.RHINO.get().create(serverLevel);
+    public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
+        return ModEntities.RHINO.get().create(pLevel);
     }
 
     @Override

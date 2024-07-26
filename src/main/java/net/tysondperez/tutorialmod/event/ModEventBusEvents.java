@@ -10,10 +10,9 @@ import net.tysondperez.tutorialmod.entity.ModEntities;
 import net.tysondperez.tutorialmod.entity.custom.RhinoEntity;
 
 @Mod.EventBusSubscriber(modid = TutorialMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-
 public class ModEventBusEvents {
     @SubscribeEvent
-    public static void registerAttributes(EntityAttributeCreationEvent event){
+    public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(ModEntities.RHINO.get(), RhinoEntity.createAttributes().build());
     }
 }
