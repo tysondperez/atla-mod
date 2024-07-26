@@ -1,6 +1,7 @@
 package net.tysondperez.tutorialmod;
 
 import com.mojang.logging.LogUtils;
+import net.minecraft.world.level.block.ComposterBlock;
 import net.tysondperez.tutorialmod.block.ModBlocks;
 import net.tysondperez.tutorialmod.entity.ModEntities;
 import net.tysondperez.tutorialmod.entity.client.RhinoRenderer;
@@ -52,16 +53,34 @@ public class TutorialMod {
         modEventBus.addListener(this::addCreative);
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event) {
+    private void commonSetup(final FMLCommonSetupEvent event)
+    {
         event.enqueueWork(() -> {
+            // Add strawberry seeds to the composter with a 30% chance
+            ComposterBlock.COMPOSTABLES.put(ModItems.STRAWBERRY_SEEDS.get(), 0.3f);
+            ComposterBlock.COMPOSTABLES.put(ModItems.STRAWBERRY.get(), 0.65f);
+
+            ComposterBlock.COMPOSTABLES.put(ModItems.CORN_SEEDS.get(), 0.3f);
+            ComposterBlock.COMPOSTABLES.put(ModItems.CORN.get(), 0.65f);
+
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.CATMINT.getId(), ModBlocks.POTTED_CATMINT);
         });
     }
 
+    // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.accept(ModItems.SAPPHIRE);
             event.accept(ModItems.RAW_SAPPHIRE);
+        }
+        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+            event.accept(ModItems.SAPPHIRE_SHOVEL);
+            event.accept(ModItems.SAPPHIRE_PICKAXE);
+            event.accept(ModItems.SAPPHIRE_HOE);
+        }
+        if (event.getTabKey() == CreativeModeTabs.COMBAT) {
+            event.accept(ModItems.SAPPHIRE_SWORD);
+            event.accept(ModItems.SAPPHIRE_AXE);
         }
     }
 
