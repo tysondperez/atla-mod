@@ -3,6 +3,7 @@ package net.tysondperez.tutorialmod.item;
 
 import net.minecraft.world.entity.monster.Ghast;
 import net.minecraft.world.entity.projectile.SmallFireball;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -10,6 +11,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.tysondperez.tutorialmod.TutorialMod;
 import net.tysondperez.tutorialmod.block.ModBlocks;
+import net.tysondperez.tutorialmod.entity.ModEntities;
 import net.tysondperez.tutorialmod.item.custom.FuelItem;
 import net.tysondperez.tutorialmod.item.custom.MetalDetectorItem;
 import net.tysondperez.tutorialmod.item.custom.ModArmorItem;
@@ -40,6 +42,10 @@ public class ModItems {
     public static final RegistryObject<Item> BAR_BRAWL_MUSIC_DISC = ITEMS.register("bar_brawl_music_disc",
             () -> new RecordItem(6, ModSounds.BAR_BRAWL,
                     new Item.Properties().stacksTo(1), 2440));
+
+    public static final RegistryObject<Item> RHINO_SPAWN_EGG = ITEMS.register("rhino_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.RHINO, 0x7e9680, 0xc5d1c5,
+                    new Item.Properties()));
 
 
     public static final RegistryObject<Item> SAPPHIRE_SWORD = ITEMS.register("sapphire_sword",

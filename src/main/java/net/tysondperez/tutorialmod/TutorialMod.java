@@ -1,6 +1,8 @@
 package net.tysondperez.tutorialmod;
 
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
@@ -16,6 +18,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.tysondperez.tutorialmod.block.ModBlocks;
+import net.tysondperez.tutorialmod.entity.ModEntities;
+import net.tysondperez.tutorialmod.entity.client.RhinoRenderer;
+import net.tysondperez.tutorialmod.entity.custom.RhinoEntity;
 import net.tysondperez.tutorialmod.item.ModCreativeModeTabs;
 import net.tysondperez.tutorialmod.item.ModItems;
 import net.tysondperez.tutorialmod.loot.ModLootModifiers;
@@ -44,6 +49,8 @@ public class TutorialMod
         ModLootModifiers.register(modEventBus);
         ModVillagers.register(modEventBus);
         ModSounds.register(modEventBus);
+
+        ModEntities.register(modEventBus);
 
 
         // Register the commonSetup method for modloading
@@ -101,7 +108,7 @@ public class TutorialMod
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-
+            EntityRenderers.register(ModEntities.RHINO.get(), RhinoRenderer::new);
         }
     }
 }
