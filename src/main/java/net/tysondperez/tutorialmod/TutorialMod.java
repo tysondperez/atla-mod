@@ -10,7 +10,6 @@ import net.tysondperez.tutorialmod.item.ModItems;
 import net.tysondperez.tutorialmod.loot.ModLootModifiers;
 import net.tysondperez.tutorialmod.sound.ModSounds;
 import net.tysondperez.tutorialmod.villagers.ModVillagers;
-import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Blocks;
