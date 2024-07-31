@@ -21,7 +21,7 @@ public class ModEntities {
 
     public static final RegistryObject<EntityType<SkyBisonEntity>> SKY_BISON =
             ENTITY_TYPES.register("sky_bison", () -> EntityType.Builder.of(SkyBisonEntity::new, MobCategory.CREATURE)
-                    .sized(6f, 5f).build("sky_bison"));
+                    .sized(3f, 5f).build("sky_bison"));
 
 
     public static void register(IEventBus eventBus) {

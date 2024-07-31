@@ -44,7 +44,11 @@ public class ModItems {
                     new Item.Properties().stacksTo(1), 2440));
 
     public static final RegistryObject<Item> RHINO_SPAWN_EGG = ITEMS.register("rhino_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntities.RHINO, 0x7e9680, 0xc5d1c5,
+            () -> new ForgeSpawnEggItem(ModEntities.RHINO, 0x9d8b80, 0x715e56,
+                    new Item.Properties()));
+
+    public static final RegistryObject<Item> SKY_BISON_SPAWN_EGG = ITEMS.register("sky_bison_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.SKY_BISON, 0xFEF7DB, 0x936F50,
                     new Item.Properties()));
 
 

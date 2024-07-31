@@ -43,8 +43,8 @@ public class SkyBisonModel<T extends Entity> extends HierarchicalModel<T> {
 
 		PartDefinition head = torso.addOrReplaceChild("head", CubeListBuilder.create().texOffs(6, 268).addBox(-25.375F, -20.75F, -15.25F, 51.0F, 18.0F, 32.0F, new CubeDeformation(0.0F))
 				.texOffs(6, 411).addBox(-24.375F, -2.75F, -15.25F, 49.0F, 18.0F, 31.0F, new CubeDeformation(0.0F))
-				.texOffs(36, 350).addBox(-22.375F, -18.75F, -19.25F, 44.0F, 33.0F, 4.0F, new CubeDeformation(0.0F))
-				.texOffs(198, 138).addBox(-13.375F, 4.25F, 15.75F, 27.0F, 7.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.375F, -54.25F, 67.25F));
+				.texOffs(25, 339).addBox(-22.375F, -18.75F, -30.25F, 44.0F, 33.0F, 15.0F, new CubeDeformation(0.0F))
+				.texOffs(198, 138).addBox(-13.375F, 4.25F, 15.75F, 27.0F, 7.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.375F, -54.25F, 67.25F, 0.0F, 0.1745F, 0.0F));
 
 		PartDefinition left_horn = head.addOrReplaceChild("left_horn", CubeListBuilder.create().texOffs(229, 72).addBox(2.0F, -1.0F, -9.0F, 5.0F, 7.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-23.375F, -11.75F, -5.25F, 0.0F, 3.1416F, 0.0F));
 
@@ -142,11 +142,11 @@ public class SkyBisonModel<T extends Entity> extends HierarchicalModel<T> {
 	}
 
 	private void applyHeadRotation(float pNetHeadYaw, float pHeadPitch, float pAgeInTicks) {
-		pNetHeadYaw = Mth.clamp(pNetHeadYaw, -30.0F, 30.0F);
-		pHeadPitch = Mth.clamp(pHeadPitch, -25.0F, 45.0F);
+		pNetHeadYaw = Mth.clamp(pNetHeadYaw, -10.0F, 10.0F);
+		pHeadPitch = Mth.clamp(pHeadPitch, -25.0F, 10.0F);
 
-		this.head.yRot = pNetHeadYaw * ((float)Math.PI / 180F);
-		this.head.xRot = pHeadPitch * ((float)Math.PI / 180F);
+		this.head.yRot = pNetHeadYaw * -((float)Math.PI / 180F);
+		this.head.xRot = pHeadPitch * -((float)Math.PI / 180F);
 	}
 
 	@Override

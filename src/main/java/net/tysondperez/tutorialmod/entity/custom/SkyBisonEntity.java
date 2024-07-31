@@ -20,8 +20,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.tysondperez.tutorialmod.entity.ModEntities;
 import net.tysondperez.tutorialmod.entity.ai.RhinoAttackGoal;
+import net.tysondperez.tutorialmod.entity.ai.SkyBisonBreedGoal;
 import org.jetbrains.annotations.Nullable;
 
 public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingAnimal, PlayerRideable {
@@ -78,15 +80,14 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
         this.goalSelector.addGoal(0, new FloatGoal(this));
 
         //this.goalSelector.addGoal(1, new RhinoAttackGoal(this, 1.0D, true));
+        this.goalSelector.addGoal(1, new SkyBisonBreedGoal(this));
+        //this.goalSelector.addGoal(2, new SkyBisonTemptGoal(this, 1.2D, Ingredient.of(Items.COOKED_BEEF), false, 50));
 
-        this.goalSelector.addGoal(1, new BreedGoal(this, 1.15D));
-        this.goalSelector.addGoal(2, new TemptGoal(this, 1.2D, Ingredient.of(Items.COOKED_BEEF), false));
+        this.goalSelector.addGoal(2, new FollowParentGoal(this, 1.1D));
 
-        this.goalSelector.addGoal(3, new FollowParentGoal(this, 1.1D));
-
-        this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 1.1D));
-        this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6f));
-        this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1.1D));
+        this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 6f));
+        this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
 
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
     }
@@ -136,7 +137,7 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
         return isAlive() && isAdult() && isTame();
     }
 
-    private boolean isAdult() {
+    public boolean isAdult() {
         return true;
     }
 
