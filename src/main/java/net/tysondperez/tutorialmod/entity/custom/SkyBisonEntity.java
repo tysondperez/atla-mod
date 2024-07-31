@@ -53,6 +53,14 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
         }
     }
 
+    @Override
+    protected void defineSynchedData()
+    {
+        super.defineSynchedData();
+        entityData.define(SADDLED, true);
+        //entityData.define(DATA_AGE, 0); // default to adult stage
+    }
+
     private void setupAnimationStates() {
         if(this.idleAnimationTimeout <= 0) {
             this.idleAnimationTimeout = this.random.nextInt(40) + 80;

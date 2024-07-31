@@ -62,11 +62,11 @@ public class SkyBisonModel<T extends Entity> extends HierarchicalModel<T> {
 
 		PartDefinition cube_r6 = right_horn.addOrReplaceChild("cube_r6", CubeListBuilder.create().texOffs(207, 50).addBox(1.0F, -20.0F, -1.0F, 5.0F, 9.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.0F, 12.0F, 5.0F, 0.0113F, -0.0496F, 0.5567F));
 
-		PartDefinition left_eye = head.addOrReplaceChild("left_eye", CubeListBuilder.create().texOffs(277, 78).addBox(-1.1F, 0.9F, -3.2F, 1.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
-				.texOffs(281, 71).addBox(0.0F, 1.5F, -3.0F, 0.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-18.575F, -0.65F, 16.85F, 0.0F, -1.5708F, 0.0F));
+		PartDefinition left_eye = head.addOrReplaceChild("left_eye", CubeListBuilder.create().texOffs(275, 76).addBox(-1.1F, -0.1F, -4.2F, 1.0F, 4.0F, 4.0F, new CubeDeformation(0.0F))
+				.texOffs(280, 70).addBox(0.0F, 1.0F, -3.5F, 0.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-18.575F, -0.65F, 16.85F, 0.0F, -1.5708F, 0.0F));
 
-		PartDefinition right_eye = head.addOrReplaceChild("right_eye", CubeListBuilder.create().texOffs(277, 78).addBox(-1.1F, 0.9F, -3.2F, 1.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
-				.texOffs(281, 71).addBox(0.0F, 1.5F, -2.5F, 0.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(14.425F, -0.65F, 16.85F, 0.0F, -1.5708F, 0.0F));
+		PartDefinition right_eye = head.addOrReplaceChild("right_eye", CubeListBuilder.create().texOffs(275, 76).addBox(-1.1F, -0.1F, -4.2F, 1.0F, 4.0F, 4.0F, new CubeDeformation(0.0F))
+				.texOffs(280, 70).addBox(0.0F, 1.2F, -2.8F, 0.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(14.425F, -0.65F, 16.85F, 0.0F, -1.5708F, 0.0F));
 
 		PartDefinition tail = torso.addOrReplaceChild("tail", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
 
