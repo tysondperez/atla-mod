@@ -5,6 +5,7 @@ import net.minecraft.world.level.block.ComposterBlock;
 import net.tysondperez.tutorialmod.block.ModBlocks;
 import net.tysondperez.tutorialmod.entity.ModEntities;
 import net.tysondperez.tutorialmod.entity.client.RhinoRenderer;
+import net.tysondperez.tutorialmod.entity.client.SkyBisonRenderer;
 import net.tysondperez.tutorialmod.item.ModCreativeModeTabs;
 import net.tysondperez.tutorialmod.item.ModItems;
 import net.tysondperez.tutorialmod.loot.ModLootModifiers;
@@ -96,6 +97,7 @@ public class TutorialMod {
         public static void onClientSetup(FMLClientSetupEvent event) {
             TutorialMod.LOGGER.info("Client setup event fired!");
             EntityRenderers.register(ModEntities.RHINO.get(), RhinoRenderer::new);
+            EntityRenderers.register(ModEntities.SKY_BISON.get(), SkyBisonRenderer::new);
         }
     }
 }

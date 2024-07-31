@@ -8,11 +8,13 @@ import net.minecraftforge.fml.common.Mod;
 import net.tysondperez.tutorialmod.TutorialMod;
 import net.tysondperez.tutorialmod.entity.client.ModModelLayers;
 import net.tysondperez.tutorialmod.entity.client.RhinoModel;
+import net.tysondperez.tutorialmod.entity.client.SkyBisonModel;
 
 @Mod.EventBusSubscriber(modid = TutorialMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModEventBusClientEvents {
     @SubscribeEvent
     public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(ModModelLayers.RHINO_LAYER, RhinoModel::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.SKY_BISON_LAYER, SkyBisonModel::createBodyLayer);
     }
 }
