@@ -7,6 +7,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -18,9 +20,13 @@ import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.SaddleItem;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
+import net.minecraftforge.common.Tags;
+import net.tysondperez.tutorialmod.TutorialMod;
 import net.tysondperez.tutorialmod.entity.ModEntities;
 import net.tysondperez.tutorialmod.entity.ai.RhinoAttackGoal;
 import net.tysondperez.tutorialmod.entity.ai.SkyBisonBreedGoal;
@@ -57,7 +63,7 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
     protected void defineSynchedData()
     {
         super.defineSynchedData();
-        entityData.define(SADDLED, true);
+        entityData.define(SADDLED, false);
         //entityData.define(DATA_AGE, 0); // default to adult stage
     }
 
@@ -171,6 +177,25 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
         return flying;
     }
 
+    public float getHealthFraction() {
+        return getHealth() / getMaxHealth();
+    }
+
+    public boolean isTamedFor(Player player) {
+        return isTame() && isOwnedBy(player);
+    }
+
+    @Override
+    public void setTame(boolean pTamed) {
+        super.setTame(pTamed);
+        if (pTamed){
+            navigation.stop();
+            setTarget(null);
+        }
+        spawnTamingParticles(pTamed);
+        TutorialMod.LOGGER.info("setTame triggered: "+pTamed);
+    }
+
     @Override
     protected void updateWalkAnimation(float pPartialTick) {
         float f;
@@ -183,5 +208,89 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
         }
 
         this.walkAnimation.update(f, 0.2f);
+    }
+
+
+    public InteractionResult mobInteract(Player player, InteractionHand hand)
+    {
+        var stack = player.getItemInHand(hand);
+
+        var stackResult = stack.interactLivingEntity(player, this, hand);
+        if (stackResult.consumesAction()) return stackResult;
+
+        // tame
+        if (!isTame())
+        {
+            if (!level().isClientSide && isFood(stack))
+            {
+                stack.shrink(1);
+                boolean succ = getRandom().nextInt(5) == 0;
+                setTame(succ);
+                if (succ) {
+                    setOwnerUUID(player.getUUID());
+                }
+                return InteractionResult.SUCCESS;
+            }
+
+            return InteractionResult.PASS;
+        }
+
+        // heal
+        if (getHealthFraction() < 1 && isFood(stack))
+        {
+            //noinspection ConstantConditions
+            heal(stack.getItem().getFoodProperties(stack, this).getNutrition());
+            playSound(getEatingSound(stack), 0.7f, 1);
+            stack.shrink(1);
+            return InteractionResult.sidedSuccess(level().isClientSide);
+        }
+
+        // saddle up!
+        if (isTamedFor(player) && isSaddleable() && !isSaddled() && stack.getItem() instanceof SaddleItem)
+        {
+            stack.shrink(1);
+            equipSaddle(getSoundSource());
+            return InteractionResult.sidedSuccess(level().isClientSide);
+        }
+
+        // give the saddle back!
+        if (isTamedFor(player) && isSaddled() && stack.is(Tags.Items.SHEARS))
+        {
+            spawnAtLocation(Items.SADDLE);
+            player.playSound(SoundEvents.SHEEP_SHEAR, 1f, 1f);
+            setSaddled(false);
+            gameEvent(GameEvent.SHEAR, player);
+            stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
+
+            return InteractionResult.sidedSuccess(level().isClientSide);
+        }
+
+        // sit!
+//        if (isTamedFor(player) && (player.isSecondaryUseActive() || stack.is(Items.BONE))) // "bone sitting" for legacy reasons
+//        {
+//            if (!level().isClientSide)
+//            {
+//                navigation.stop();
+//                setOrderedToSit(!isOrderedToSit());
+//                if (isOrderedToSit()) setTarget(null);
+//            }
+//            return InteractionResult.sidedSuccess(level().isClientSide);
+//        }
+
+        // ride on
+//        if (isTamedFor(player) && isSaddled() && !isHatchling() && !isFood(stack))
+//        {
+//            if (!level().isClientSide)
+//            {
+//                player.startRiding(this);
+//                navigation.stop();
+//                setTarget(null);
+//            }
+//            setOrderedToSit(false);
+//            setInSittingPose(false);
+//            return InteractionResult.sidedSuccess(level().isClientSide);
+//        }
+
+        return super.mobInteract(player, hand);
     }
 }
