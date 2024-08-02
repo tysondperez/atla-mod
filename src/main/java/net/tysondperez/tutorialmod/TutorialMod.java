@@ -1,11 +1,15 @@
 package net.tysondperez.tutorialmod;
 
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.KeyMapping;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.ComposterBlock;
+import net.minecraftforge.client.event.ViewportEvent;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.config.ModConfig;
 import net.tysondperez.tutorialmod.block.ModBlocks;
 import net.tysondperez.tutorialmod.entity.ModEntities;
-import net.tysondperez.tutorialmod.entity.client.RhinoRenderer;
-import net.tysondperez.tutorialmod.entity.client.SkyBisonRenderer;
+import net.tysondperez.tutorialmod.entity.client.*;
 import net.tysondperez.tutorialmod.item.ModCreativeModeTabs;
 import net.tysondperez.tutorialmod.item.ModItems;
 import net.tysondperez.tutorialmod.loot.ModLootModifiers;
@@ -27,14 +31,23 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
+import java.util.function.Consumer;
+
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(TutorialMod.MODID)
 public class TutorialMod {
     public static final String MODID = "myuniq3131id";
     public static final Logger LOGGER = LogUtils.getLogger();
 
+    public static ResourceLocation id(String path)
+    {
+        return new ResourceLocation(MODID, path);
+    }
+
     public TutorialMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, DMLConfig.CLIENT_SPEC);
 
         ModCreativeModeTabs.register(modEventBus);
 
@@ -46,6 +59,9 @@ public class TutorialMod {
 
         ModSounds.register(modEventBus);
         ModEntities.register(modEventBus);
+
+        var bus = MinecraftForge.EVENT_BUS;
+        bus.addListener((ViewportEvent.ComputeCameraAngles e) -> MountCameraManager.setMountCameraAngles(e.getCamera()));
 
         modEventBus.addListener(this::commonSetup);
 
@@ -100,4 +116,20 @@ public class TutorialMod {
             EntityRenderers.register(ModEntities.SKY_BISON.get(), SkyBisonRenderer::new);
         }
     }
+
+    static void registerKeyBindings(Consumer<KeyMapping> registrar)
+    {
+        KeyMappings.registerKeybinds(registrar);
+    }
+
+    static void clientTick(boolean head)
+    {
+        if (!head) MountControlsMessenger.tick();
+    }
+
+    static void onKeyPress(int key, int action, int modifiers)
+    {
+        KeyMappings.handleKeyPress(key, action);
+    }
+
 }

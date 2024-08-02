@@ -1,6 +1,7 @@
 package net.tysondperez.tutorialmod.event;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.npc.VillagerProfession;
@@ -13,6 +14,7 @@ import net.minecraft.world.item.SaddleItem;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
@@ -104,7 +106,7 @@ public class ModEvents {
                 event.setCancellationResult(InteractionResult.FAIL);
                 event.setCanceled(true);
             }
-            if (stack.getItem() instanceof BigSaddleItem) {
+            if (stack.getItem() instanceof BigSaddleItem && !((SkyBisonEntity) (event.getTarget())).isSaddled()) {
                 event.setCancellationResult(InteractionResult.SUCCESS);
                 event.setCanceled(false);
             }
