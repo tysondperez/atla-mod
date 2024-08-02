@@ -33,6 +33,8 @@ public class ModCreativeModeTabs {
 
                         pOutput.accept(ModItems.PINE_CONE.get());
 
+                        pOutput.accept(ModItems.BIG_SADDLE.get());
+
                         pOutput.accept(ModItems.SAPPHIRE_STAFF.get());
                         pOutput.accept(ModItems.SAPPHIRE_SWORD.get());
                         pOutput.accept(ModItems.SAPPHIRE_PICKAXE.get());

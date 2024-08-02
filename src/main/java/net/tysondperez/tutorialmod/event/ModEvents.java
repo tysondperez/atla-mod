@@ -1,21 +1,28 @@
 package net.tysondperez.tutorialmod.event;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.SaddleItem;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.tysondperez.tutorialmod.TutorialMod;
 import net.tysondperez.tutorialmod.block.ModBlocks;
+import net.tysondperez.tutorialmod.entity.custom.SkyBisonEntity;
 import net.tysondperez.tutorialmod.item.ModItems;
+import net.tysondperez.tutorialmod.item.custom.BigSaddleItem;
 import net.tysondperez.tutorialmod.villagers.ModVillagers;
 
 import java.util.List;
@@ -86,5 +93,21 @@ public class ModEvents {
                 new ItemStack(Items.EMERALD, 24),
                 new ItemStack(ModItems.METAL_DETECTOR.get(), 1),
                 2, 12, 0.15f));
+    }
+
+    @SubscribeEvent
+    public static void onPlayerInteractEntity(PlayerInteractEvent.EntityInteract event) {
+        if (event.getTarget() instanceof SkyBisonEntity) {
+            ItemStack stack = event.getItemStack();
+            // Handle saddle
+            if (stack.getItem() instanceof SaddleItem) {
+                event.setCancellationResult(InteractionResult.FAIL);
+                event.setCanceled(true);
+            }
+            if (stack.getItem() instanceof BigSaddleItem) {
+                event.setCancellationResult(InteractionResult.SUCCESS);
+                event.setCanceled(false);
+            }
+        }
     }
 }

@@ -12,10 +12,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.tysondperez.tutorialmod.TutorialMod;
 import net.tysondperez.tutorialmod.block.ModBlocks;
 import net.tysondperez.tutorialmod.entity.ModEntities;
-import net.tysondperez.tutorialmod.item.custom.FuelItem;
-import net.tysondperez.tutorialmod.item.custom.MetalDetectorItem;
-import net.tysondperez.tutorialmod.item.custom.ModArmorItem;
-import net.tysondperez.tutorialmod.item.custom.SapphireStaffItem;
+import net.tysondperez.tutorialmod.item.custom.*;
 import net.tysondperez.tutorialmod.sound.ModSounds;
 
 public class ModItems {
@@ -35,6 +32,9 @@ public class ModItems {
             () -> new Item(new Item.Properties().food(ModFoods.STRAWBERRY)));
     public static final RegistryObject<Item> CORN = ITEMS.register("corn",
             () -> new Item(new Item.Properties().food(ModFoods.CORN)));
+
+    public static final RegistryObject<Item> BIG_SADDLE = ITEMS.register("big_saddle",
+            () -> new BigSaddleItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> SAPPHIRE_STAFF = ITEMS.register("sapphire_staff",
             () -> new SapphireStaffItem(new Item.Properties().durability(100)));

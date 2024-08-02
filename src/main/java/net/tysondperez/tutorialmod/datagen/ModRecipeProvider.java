@@ -40,6 +40,13 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(ModItems.SAPPHIRE.get()), has(ModItems.SAPPHIRE.get()))
                 .save(pWriter, new ResourceLocation("myuniq3131id", "sapphire_block_from_sapphire"));
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.BIG_SADDLE.get())
+                .pattern("SS")
+                .pattern("SS")
+                .define('S', Items.SADDLE)
+                .unlockedBy(getHasName(Items.SADDLE), has(Items.SADDLE))
+                .save(pWriter);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.SAPPHIRE_BLOCK.get() /*result of the recipe*/) // Shaped Recipe
                 .pattern("FFF") // {
                 .pattern("FFF") //   pattern of recipe
@@ -51,6 +58,11 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.SAPPHIRE.get(), 9)
                 .requires(ModBlocks.SAPPHIRE_BLOCK.get())
                 .unlockedBy(getHasName(ModBlocks.SAPPHIRE_BLOCK.get()), has(ModBlocks.SAPPHIRE_BLOCK.get()))
+                .save(pWriter);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.SADDLE, 4)
+                .requires(ModItems.BIG_SADDLE.get())
+                .unlockedBy(getHasName(ModItems.BIG_SADDLE.get()), has(ModItems.BIG_SADDLE.get()))
                 .save(pWriter);
     }
 

@@ -25,11 +25,14 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.Tags;
 import net.tysondperez.tutorialmod.TutorialMod;
 import net.tysondperez.tutorialmod.entity.ModEntities;
 import net.tysondperez.tutorialmod.entity.ai.RhinoAttackGoal;
 import net.tysondperez.tutorialmod.entity.ai.SkyBisonBreedGoal;
+import net.tysondperez.tutorialmod.item.ModItems;
+import net.tysondperez.tutorialmod.item.custom.BigSaddleItem;
 import org.jetbrains.annotations.Nullable;
 
 public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingAnimal, PlayerRideable {
@@ -245,18 +248,21 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
             return InteractionResult.sidedSuccess(level().isClientSide);
         }
 
-        // saddle up!
-        if (isTamedFor(player) && isSaddleable() && !isSaddled() && stack.getItem() instanceof SaddleItem)
+
+         //saddle up!
+        if (isTamedFor(player) && isSaddleable() && !isSaddled() && (stack.getItem() instanceof BigSaddleItem))
         {
             stack.shrink(1);
             equipSaddle(getSoundSource());
             return InteractionResult.sidedSuccess(level().isClientSide);
+        } else if (stack.getItem() instanceof SaddleItem){
+            return InteractionResult.SUCCESS;
         }
 
         // give the saddle back!
         if (isTamedFor(player) && isSaddled() && stack.is(Tags.Items.SHEARS))
         {
-            spawnAtLocation(Items.SADDLE);
+            spawnAtLocation(ModItems.BIG_SADDLE.get());
             player.playSound(SoundEvents.SHEEP_SHEAR, 1f, 1f);
             setSaddled(false);
             gameEvent(GameEvent.SHEAR, player);
