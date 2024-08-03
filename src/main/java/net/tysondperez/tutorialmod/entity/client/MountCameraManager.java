@@ -3,7 +3,7 @@ package net.tysondperez.tutorialmod.entity.client;
 import net.minecraft.client.Camera;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
-import net.tysondperez.tutorialmod.DMLConfig;
+import net.tysondperez.tutorialmod.AppaConfig;
 import net.tysondperez.tutorialmod.entity.custom.SkyBisonEntity;
 
 public class MountCameraManager
@@ -34,7 +34,7 @@ public class MountCameraManager
     {
         if (Minecraft.getInstance().player.getVehicle() instanceof SkyBisonEntity && !Minecraft.getInstance().options.getCameraType().isFirstPerson())
         {
-            var offsets = DMLConfig.getCameraPerspectiveOffset(Minecraft.getInstance().options.getCameraType() == CameraType.THIRD_PERSON_BACK);
+            var offsets = AppaConfig.getCameraPerspectiveOffset(Minecraft.getInstance().options.getCameraType() == CameraType.THIRD_PERSON_BACK);
             camera.move(0, offsets[1].get(), offsets[2].get());
             camera.move(-camera.getMaxZoom(offsets[0].get()), 0, 0); // do distance calcs AFTER our new position is set
         }

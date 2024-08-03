@@ -138,6 +138,7 @@ public class SkyBisonModel<T extends Entity> extends HierarchicalModel<T> {
 
 		this.animateWalk(ModAnimationDefinitions.SKY_BISON_WALK, limbSwing, limbSwingAmount, 2f, 2.5f);
 		this.animate(((SkyBisonEntity) entity).idleAnimationState, ModAnimationDefinitions.SKY_BISON_IDLE, ageInTicks, 1f);
+		this.animate(((SkyBisonEntity) entity).flyAnimationState, ModAnimationDefinitions.SKY_BISON_FLY, ageInTicks, 1f);
 		//this.animate(((SkyBisonEntity) entity).attackAnimationState, ModAnimationDefinitions.SKY_BISON_ATTACK, ageInTicks, 1f);
 	}
 

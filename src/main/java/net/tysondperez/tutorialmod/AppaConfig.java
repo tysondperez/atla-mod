@@ -1,13 +1,8 @@
 package net.tysondperez.tutorialmod;
 
-import com.google.common.collect.ImmutableMap;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
 
-import java.util.Map;
-
-public class DMLConfig
+public class AppaConfig
 {
 
     public static final ForgeConfigSpec CLIENT_SPEC;
@@ -32,6 +27,7 @@ public class DMLConfig
 
     public static ForgeConfigSpec.DoubleValue[] getCameraPerspectiveOffset(boolean back)
     {
+        //back = false;
         return CAMERA_OFFSETS[back? 0 : 1];
     }
 
@@ -63,17 +59,36 @@ public class DMLConfig
 
     private static void defineCameraOffsetEntries(ForgeConfigSpec.Builder configurator)
     {
+        TutorialMod.LOGGER.info("building arrays!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         var perspectiveName = "back";
         for (ForgeConfigSpec.DoubleValue[] perspective : CAMERA_OFFSETS)
         {
             configurator.push("third_person_" + perspectiveName);
+
+            if (perspectiveName.equals("back")){
+                perspective[0] = configurator.defineInRange("distance", 6.0, -3, 1000);
+            } else {
+                perspective[0] = configurator.defineInRange("distance", 8.0, -3, 1000);
+            }
             perspectiveName = "front";
 
-            perspective[0] = configurator.defineInRange("distance", 6.0, -3, 1000);
-            perspective[1] = configurator.defineInRange("vertical", 4.0, -3, 1000);
+
+            perspective[1] = configurator.defineInRange("vertical", 0.0, -3, 1000);
             perspective[2] = configurator.defineInRange("horizontal", 0.0, -1000, 1000);
 
+
+
             configurator.pop();
+        }
+    }
+
+    public static void printOffsets(){
+        TutorialMod.LOGGER.info("arrays built");
+        for (int i = 0; i < 3; i++){
+            TutorialMod.LOGGER.info("value at arr["+i+"]: "+CAMERA_OFFSETS[0][i].get());
+        }
+        for (int i = 0; i < 3; i++){
+            TutorialMod.LOGGER.info("value at arr["+i+"]: "+CAMERA_OFFSETS[1][i].get());
         }
     }
 }

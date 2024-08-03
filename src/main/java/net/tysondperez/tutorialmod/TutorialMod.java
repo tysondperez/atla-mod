@@ -9,6 +9,7 @@ import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.tysondperez.tutorialmod.block.ModBlocks;
 import net.tysondperez.tutorialmod.entity.ModEntities;
 import net.tysondperez.tutorialmod.entity.client.*;
@@ -49,7 +50,7 @@ public class TutorialMod {
     public TutorialMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, DMLConfig.CLIENT_SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, AppaConfig.CLIENT_SPEC);
 
         ModCreativeModeTabs.register(modEventBus);
 
@@ -72,6 +73,8 @@ public class TutorialMod {
 
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
+
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onLoadComplete);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)
@@ -109,6 +112,15 @@ public class TutorialMod {
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
 
+    }
+
+    public void onLoadComplete(ModConfigEvent.Loading event)
+    {
+        TutorialMod.LOGGER.info("event fired");
+        if (event.getConfig().getSpec() == AppaConfig.CLIENT_SPEC)
+        {
+            AppaConfig.printOffsets();
+        }
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent

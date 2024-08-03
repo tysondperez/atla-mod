@@ -5,7 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import java.util.function.Consumer;
 
-import net.tysondperez.tutorialmod.DMLConfig;
+import net.tysondperez.tutorialmod.AppaConfig;
 import net.tysondperez.tutorialmod.TutorialMod;
 import net.tysondperez.tutorialmod.entity.custom.SkyBisonEntity;
 import org.lwjgl.glfw.GLFW;
@@ -32,9 +32,9 @@ public class KeyMappings {
                 && action == GLFW.GLFW_PRESS
                 && Minecraft.getInstance().player.getVehicle() instanceof SkyBisonEntity d)
         {
-            DMLConfig.CAMERA_DRIVEN_FLIGHT.set(!DMLConfig.cameraDrivenFlight());
-            TutorialMod.LOGGER.info("camera flight set to "+DMLConfig.CAMERA_DRIVEN_FLIGHT.get());
-            Minecraft.getInstance().player.displayClientMessage(Component.translatable("mount.dragon.camera_controls." + (DMLConfig.cameraDrivenFlight()? "enabled" : "disabled"), d.getDisplayName()), true);
+            AppaConfig.CAMERA_DRIVEN_FLIGHT.set(!AppaConfig.cameraDrivenFlight());
+            TutorialMod.LOGGER.info("camera flight set to "+ AppaConfig.CAMERA_DRIVEN_FLIGHT.get());
+            Minecraft.getInstance().player.displayClientMessage(Component.translatable("mount.dragon.camera_controls." + (AppaConfig.cameraDrivenFlight()? "enabled" : "disabled"), d.getDisplayName()), true);
         }
     }
 }

@@ -25,16 +25,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SaddleItem;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.Tags;
-import net.tysondperez.tutorialmod.DMLConfig;
+import net.tysondperez.tutorialmod.AppaConfig;
 import net.tysondperez.tutorialmod.TutorialMod;
 import net.tysondperez.tutorialmod.entity.ModEntities;
-import net.tysondperez.tutorialmod.entity.ai.RhinoAttackGoal;
 import net.tysondperez.tutorialmod.entity.ai.SkyBisonBodyController;
 import net.tysondperez.tutorialmod.entity.ai.SkyBisonBreedGoal;
 import net.tysondperez.tutorialmod.entity.ai.SkyBisonMoveController;
@@ -84,6 +82,9 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
     public final AnimationState attackAnimationState = new AnimationState();
     public int attackAnimationTimeout = 0;
 
+    public final AnimationState flyAnimationState = new AnimationState();
+    public int flyAnimationTimeout = 0;
+
 
     @Override
     public void tick() {
@@ -103,6 +104,10 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
             if (!level().isClientSide) setNavigation(flying);
         }
 
+        if (this.onGround()){
+            setFlying(false);
+        }
+
         if(this.level().isClientSide()) {
             setupAnimationStates();
         }
@@ -119,11 +124,19 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
     }
 
     private void setupAnimationStates() {
-        if(this.idleAnimationTimeout <= 0) {
-            this.idleAnimationTimeout = this.random.nextInt(40) + 80;
+        if(!this.isFlying() && this.idleAnimationTimeout <= 0) {
+            this.idleAnimationTimeout = /*this.random.nextInt(40) +*/ 800;
             this.idleAnimationState.start(this.tickCount);
         } else {
             --this.idleAnimationTimeout;
+        }
+
+        if(this.isFlying() && this.flyAnimationTimeout <= 0) {
+            this.flyAnimationTimeout = 40;
+            this.flyAnimationState.start(this.tickCount);
+            this.idleAnimationState.stop();
+        } else {
+            --this.flyAnimationTimeout;
         }
 
 //        if(this.isAttacking() && attackAnimationTimeout <= 0) {
@@ -136,6 +149,9 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
 //        if(!this.isAttacking()) {
 //            attackAnimationState.stop();
 //        }
+        if(!this.isFlying()) {
+            flyAnimationState.stop();
+        }
     }
 
 
@@ -195,7 +211,7 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
     public void setFlying(boolean flying)
     {
         this.flying = flying;
-        TutorialMod.LOGGER.info("flying set to "+flying);
+        //TutorialMod.LOGGER.info("flying set to "+flying);
     }
 
     public boolean isNearGround()
@@ -329,7 +345,7 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
             moveForward = moveForward > 0? moveForward : 0;
             if (driver.jumping) moveY = 1;
             else if (KeyMappings.FLIGHT_DESCENT_KEY.isDown()) moveY = -1;
-            else if (moveForward > 0 && DMLConfig.cameraDrivenFlight()) moveY = -driver.getXRot() / 90; // normalize from -1 to 1
+            else if (moveForward > 0 && AppaConfig.cameraDrivenFlight()) moveY = -driver.getXRot() / 90; // normalize from -1 to 1
         }
 
         // mimic dogshit implementation of AI movement vectors
@@ -386,7 +402,7 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
 
     @Override
     public double getPassengersRidingOffset() {
-        return super.getPassengersRidingOffset() + .8D;
+        return super.getPassengersRidingOffset() + .6f;
     }
 
     @Override
@@ -429,6 +445,12 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
     public void liftOff()
     {
         if (canFly()) jumpFromGround();
+    }
+
+    @Override
+    public boolean causeFallDamage(float pFallDistance, float pMultiplier, DamageSource pSource)
+    {
+        return !canFly() && super.causeFallDamage(pFallDistance, pMultiplier, pSource);
     }
 
 
