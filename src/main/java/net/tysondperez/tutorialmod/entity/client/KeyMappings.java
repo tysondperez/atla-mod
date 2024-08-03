@@ -33,6 +33,7 @@ public class KeyMappings {
                 && Minecraft.getInstance().player.getVehicle() instanceof SkyBisonEntity d)
         {
             DMLConfig.CAMERA_DRIVEN_FLIGHT.set(!DMLConfig.cameraDrivenFlight());
+            TutorialMod.LOGGER.info("camera flight set to "+DMLConfig.CAMERA_DRIVEN_FLIGHT.get());
             Minecraft.getInstance().player.displayClientMessage(Component.translatable("mount.dragon.camera_controls." + (DMLConfig.cameraDrivenFlight()? "enabled" : "disabled"), d.getDisplayName()), true);
         }
     }

@@ -195,6 +195,7 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
     public void setFlying(boolean flying)
     {
         this.flying = flying;
+        TutorialMod.LOGGER.info("flying set to "+flying);
     }
 
     public boolean isNearGround()
@@ -328,7 +329,7 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
             moveForward = moveForward > 0? moveForward : 0;
             if (driver.jumping) moveY = 1;
             else if (KeyMappings.FLIGHT_DESCENT_KEY.isDown()) moveY = -1;
-            else if (moveForward > 0 /*&& DMLConfig.cameraDrivenFlight()*/) moveY = -driver.getXRot() / 90; // normalize from -1 to 1
+            else if (moveForward > 0 && DMLConfig.cameraDrivenFlight()) moveY = -driver.getXRot() / 90; // normalize from -1 to 1
         }
 
         // mimic dogshit implementation of AI movement vectors
@@ -346,7 +347,7 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
     protected void tickRidden(Player driver, Vec3 move)
     {
         // rotate head to match driver.
-        TutorialMod.LOGGER.info("tickRidden");
+        //TutorialMod.LOGGER.info("tickRidden");
         float yaw = driver.yHeadRot;
         if (move.z > 0) // rotate in the direction of the drivers controls
             yaw += (float) Mth.atan2(driver.zza, driver.xxa) * (180f / (float) Math.PI) - 90;
