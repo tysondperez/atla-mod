@@ -1,5 +1,6 @@
 package net.tysondperez.tutorialmod.entity.custom;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -53,6 +54,9 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
 
     private static final EntityDataAccessor<Boolean> SADDLED =
             SynchedEntityData.defineId(SkyBisonEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final String NBT_SADDLED = "Saddle";
+    private static final EntityDataAccessor<Integer> DATA_AGE =
+            SynchedEntityData.defineId(SkyBisonEntity.class, EntityDataSerializers.INT);
 
     private final GroundPathNavigation groundNavigation;
     private final FlyingPathNavigation flyingNavigation;
@@ -84,6 +88,23 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
     public final AnimationState flyAnimationState = new AnimationState();
     public int flyAnimationTimeout = 0;
 
+    @Override
+    public void addAdditionalSaveData(CompoundTag compound)
+    {
+        super.addAdditionalSaveData(compound);
+        compound.putBoolean(NBT_SADDLED, isSaddled());
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag compound)
+    {
+        super.readAdditionalSaveData(compound);
+
+        setSaddled(compound.getBoolean(NBT_SADDLED));
+
+        // set sync age data after we read it in AgeableMob
+        //entityData.set(DATA_AGE, getAge());
+    }
 
     @Override
     public void tick() {
