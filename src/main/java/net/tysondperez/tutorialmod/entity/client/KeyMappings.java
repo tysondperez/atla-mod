@@ -34,7 +34,7 @@ public class KeyMappings {
         {
             AppaConfig.CAMERA_DRIVEN_FLIGHT.set(!AppaConfig.cameraDrivenFlight());
             TutorialMod.LOGGER.info("camera flight set to "+ AppaConfig.CAMERA_DRIVEN_FLIGHT.get());
-            Minecraft.getInstance().player.displayClientMessage(Component.translatable("mount.dragon.camera_controls." + (AppaConfig.cameraDrivenFlight()? "enabled" : "disabled"), d.getDisplayName()), true);
+            Minecraft.getInstance().player.displayClientMessage(Component.translatable("mount.sky_bison.camera_controls." + (AppaConfig.cameraDrivenFlight()? "enabled" : "disabled"), d.getDisplayName()), true);
         }
     }
 }

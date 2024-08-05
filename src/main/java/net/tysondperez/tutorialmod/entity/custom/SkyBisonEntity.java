@@ -283,13 +283,19 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
         SkyBisonEntity baby = ModEntities.SKY_BISON.get().create(serverLevel);
         if (baby != null){
             baby.setGrowingAge(-12000);
+            baby.setTame(true);
+            baby.setOwnerUUID(getOwnerUUID());
         }
         return baby;
     }
 
     @Override
     public boolean isFood(ItemStack pStack) {
-        return pStack.is(Items.COOKED_BEEF);
+        return pStack.is(Items.HAY_BLOCK);
+    }
+
+    public boolean isTameFood(ItemStack pStack) {
+        return pStack.is(Items.BAMBOO);
     }
 
     @Nullable
@@ -353,10 +359,12 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
     public void setTame(boolean pTamed) {
         super.setTame(pTamed);
         if (pTamed){
-            navigation.stop();
             setTarget(null);
         }
-        spawnTamingParticles(pTamed);
+        if (isAdult()){
+            spawnTamingParticles(pTamed);
+            spawnTamingParticles(pTamed);
+        }
         TutorialMod.LOGGER.info("setTame triggered: "+pTamed);
     }
 
@@ -550,7 +558,7 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
         // tame
         if (!isTame())
         {
-            if (!level().isClientSide && isFood(stack))
+            if (!level().isClientSide && isTameFood(stack))
             {
                 stack.shrink(1);
                 boolean succ = getRandom().nextInt(5) == 0;
@@ -568,7 +576,8 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
         if (getHealthFraction() < 1 && isFood(stack))
         {
             //noinspection ConstantConditions
-            heal(stack.getItem().getFoodProperties(stack, this).getNutrition());
+            //heal(stack.getItem().getFoodProperties(stack, this).getNutrition());
+            heal(3);
             playSound(getEatingSound(stack), 0.7f, 1);
             stack.shrink(1);
             return InteractionResult.sidedSuccess(level().isClientSide);

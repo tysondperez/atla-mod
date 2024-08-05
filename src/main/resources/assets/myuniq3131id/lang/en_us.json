@@ -62,6 +62,15 @@
   "item.myuniq3131id.bar_brawl_music_disc": "Bar Brawl Music Disc",
   "item.myuniq3131id.bar_brawl_music_disc.desc": "Bryan Tech - Bar Brawl (CC0)",
 
+  "entity.myuniq3131id.sky_bison": "Sky Bison",
+
+  "key.myuniq3131id.flight_descent": "Sky Bison Flight Descent",
+  "key.myuniq3131id.camera_flight": "Sky Bison Flight Commands",
+
+  "mount.sky_bison.vertical_controls": "Press %s to Ascend and %s to Descend",
+  "mount.sky_bison.camera_controls.enabled": "%s will now Ascend Toward Your Direction",
+  "mount.sky_bison.camera_controls.disabled": "%s will now only Ascend on your Command",
+
   "block.myuniq3131id.sapphire_ore": "Sapphire Ore",
   "block.myuniq3131id.deepslate_sapphire_ore": "Deepslate Sapphire Ore",
   "block.myuniq3131id.nether_sapphire_ore": "Nether Sapphire Ore",
