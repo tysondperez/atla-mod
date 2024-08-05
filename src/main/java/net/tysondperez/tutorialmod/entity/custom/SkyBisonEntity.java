@@ -55,8 +55,9 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
     private static final EntityDataAccessor<Boolean> SADDLED =
             SynchedEntityData.defineId(SkyBisonEntity.class, EntityDataSerializers.BOOLEAN);
     private static final String NBT_SADDLED = "Saddle";
-    private static final EntityDataAccessor<Integer> DATA_AGE =
+    private static final EntityDataAccessor<Integer> AGE_ID =
             SynchedEntityData.defineId(SkyBisonEntity.class, EntityDataSerializers.INT);
+    private static final String NBT_AGE = "Age";
 
     private final GroundPathNavigation groundNavigation;
     private final FlyingPathNavigation flyingNavigation;
@@ -93,6 +94,7 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
     {
         super.addAdditionalSaveData(compound);
         compound.putBoolean(NBT_SADDLED, isSaddled());
+        compound.putInt(NBT_AGE, getGrowingAge());
     }
 
     @Override
@@ -103,18 +105,23 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
         setSaddled(compound.getBoolean(NBT_SADDLED));
 
         // set sync age data after we read it in AgeableMob
-        //entityData.set(DATA_AGE, getAge());
+        setGrowingAge(compound.getInt(NBT_AGE));
     }
 
     @Override
     public void tick() {
+
         super.tick();
+
+        if (!level().isClientSide)
+        {
+            // heal randomly
+            if (isAlive() && getRandom().nextFloat() < 0.001) heal(1f);
+        }
 
         nearGround = onGround() || !level().noCollision(this,
                 new AABB(getX(), getY(), getZ(), getX(), getY() -
                         (GROUND_CLEARENCE_THRESHOLD * getScale()), getZ()));
-
-        if (tickCount % 20 == 0) TutorialMod.LOGGER.info("Tick - Position: " + this.getX() + ", " + this.getY() + ", " + this.getZ());
 
         // update flying state based on the distance to the ground
         boolean flying = shouldFly();
@@ -147,7 +154,7 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
     {
         super.defineSynchedData();
         entityData.define(SADDLED, false);
-        //entityData.define(DATA_AGE, 0); // default to adult stage
+        entityData.define(AGE_ID, 0); // default to adult stage
     }
 
     private void setupAnimationStates() {
@@ -181,8 +188,29 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
         }
     }
 
+    @Override
+    public void aiStep() {
+        super.aiStep();
+        if (!level().isClientSide && this.isAlive() && this.isBaby()) {
+            int age = this.getGrowingAge();
+            if (age < 0) {
+                this.setGrowingAge(age + 1); // Increment the age by 1 each tick (20 ticks = 1 second)
+            }
+        }
+    }
 
+    public int getGrowingAge() {
+        return this.entityData.get(AGE_ID);
+    }
 
+    public void setGrowingAge(int age) {
+        this.entityData.set(AGE_ID, age);
+    }
+
+    @Override
+    public boolean isBaby() {
+        return this.getGrowingAge() < 0;
+    }
 
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
@@ -222,7 +250,6 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
 
     public boolean canFly()
     {
-        // hatchling's can't fly
         return isAdult();
     }
 
@@ -238,7 +265,6 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
     public void setFlying(boolean flying)
     {
         this.flying = flying;
-        //TutorialMod.LOGGER.info("flying set to "+flying);
     }
 
     public boolean isNearGround()
@@ -254,7 +280,11 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-        return ModEntities.SKY_BISON.get().create(serverLevel);
+        SkyBisonEntity baby = ModEntities.SKY_BISON.get().create(serverLevel);
+        if (baby != null){
+            baby.setGrowingAge(-12000);
+        }
+        return baby;
     }
 
     @Override
@@ -286,7 +316,7 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
     }
 
     public boolean isAdult() {
-        return true;
+        return !(entityData.get(AGE_ID) < 0);
     }
 
     @Override
@@ -353,7 +383,6 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
             calculateEntityAnimation(true);
         }
         else {
-            if (tickCount % 20 == 0) TutorialMod.LOGGER.info("travelling no flight, icbli: "+isControlledByLocalInstance());
             super.travel(vec3);
         }
     }
@@ -388,7 +417,6 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
     protected void tickRidden(Player driver, Vec3 move)
     {
         // rotate head to match driver.
-        //TutorialMod.LOGGER.info("tickRidden");
         float yaw = driver.yHeadRot;
         if (move.z > 0) // rotate in the direction of the drivers controls
             yaw += (float) Mth.atan2(driver.zza, driver.xxa) * (180f / (float) Math.PI) - 90;
@@ -491,6 +519,24 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
         }
 
         this.walkAnimation.update(f, 0.2f);
+    }
+
+
+    /**
+     * returns true if this entity is by a ladder, false otherwise
+     */
+    @Override
+    public boolean onClimbable()
+    {
+        return false;
+    }
+
+    @Override
+    protected void dropCustomDeathLoot(DamageSource source, int looting, boolean recentlyHitIn)
+    {
+        super.dropCustomDeathLoot(source, looting, recentlyHitIn);
+
+        if (isSaddled()) spawnAtLocation(Items.SADDLE);
     }
 
 
