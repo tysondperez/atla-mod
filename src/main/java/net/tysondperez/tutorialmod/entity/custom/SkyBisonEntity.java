@@ -57,7 +57,6 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
     private final GroundPathNavigation groundNavigation;
     private final FlyingPathNavigation flyingNavigation;
 
-
     private boolean flying;
     private boolean nearGround;
 
@@ -94,6 +93,8 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
                 new AABB(getX(), getY(), getZ(), getX(), getY() -
                         (GROUND_CLEARENCE_THRESHOLD * getScale()), getZ()));
 
+        if (tickCount % 20 == 0) TutorialMod.LOGGER.info("Tick - Position: " + this.getX() + ", " + this.getY() + ", " + this.getZ());
+
         // update flying state based on the distance to the ground
         boolean flying = shouldFly();
         if (flying != isFlying())
@@ -101,18 +102,23 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
             setFlying(flying);
 
             // update pathfinding method
-            if (!level().isClientSide) setNavigation(flying);
+            if (!level().isClientSide){
+                setNavigation(flying);
+                TutorialMod.LOGGER.info("Switching Navigation to: " + (flying ? "Flying" : "Ground"));
+            }
         }
 
         if (this.onGround()){
             setFlying(false);
         }
 
+        if (this.isFlying()){
+            navigation.stop();
+        }
+
         if(this.level().isClientSide()) {
             setupAnimationStates();
         }
-
-
     }
 
     @Override
@@ -162,7 +168,7 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
 
         //this.goalSelector.addGoal(1, new RhinoAttackGoal(this, 1.0D, true));
         this.goalSelector.addGoal(1, new SkyBisonBreedGoal(this));
-        //this.goalSelector.addGoal(2, new SkyBisonTemptGoal(this, 1.2D, Ingredient.of(Items.COOKED_BEEF), false, 50));
+        //this.goalSelector.addGoal(2, new TemptGoal(this, 1.2D, Ingredient.of(Items.COOKED_BEEF), false));
 
         this.goalSelector.addGoal(2, new FollowParentGoal(this, 1.1D));
 
@@ -326,12 +332,10 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
             calculateEntityAnimation(true);
         }
         else {
-            //TutorialMod.LOGGER.info("travelling no flight");
+            if (tickCount % 20 == 0) TutorialMod.LOGGER.info("travelling no flight, icbli: "+isControlledByLocalInstance());
             super.travel(vec3);
         }
     }
-
-
 
     @Override
     protected Vec3 getRiddenInput(Player driver, Vec3 move)
@@ -379,10 +383,10 @@ public class SkyBisonEntity extends TamableAnimal implements Saddleable, FlyingA
         }
     }
 
-    @Override
-    public boolean isControlledByLocalInstance() {
-        return this.getControllingPassenger() instanceof Player;
-    }
+//    @Override
+//    public boolean isControlledByLocalInstance() {
+//        return this.getControllingPassenger() instanceof Player;
+//    }
 
     @Override
     protected void positionRider(Entity passenger, MoveFunction pCallback) {
