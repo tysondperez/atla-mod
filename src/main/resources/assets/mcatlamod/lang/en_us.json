@@ -1,0 +1,16 @@
+{
+  "item.mcatlamod.sky_bison_spawn_egg": "Sky Bison Spawn Egg",
+
+  "item.mcatlamod.big_saddle": "Big Saddle",
+
+  "creativetab.atla_tab": "ATLA Mod Tab",
+
+  "entity.mcatlamod.sky_bison": "Sky Bison",
+
+  "key.mcatlamod.flight_descent": "Sky Bison Flight Descent",
+  "key.mcatlamod.camera_flight": "Sky Bison Flight Commands",
+
+  "mount.sky_bison.vertical_controls": "Press %s to Ascend and %s to Descend",
+  "mount.sky_bison.camera_controls.enabled": "%s will now Ascend Toward Your Direction",
+  "mount.sky_bison.camera_controls.disabled": "%s will now only Ascend on your Command"
+}

@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "myuniq3131id:item/sapphire_boots",
-    "layer1": "minecraft:trims/items/boots_trim_amethyst"
-  }
-}

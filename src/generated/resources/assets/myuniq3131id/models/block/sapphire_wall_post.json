@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/template_wall_post",
-  "textures": {
-    "wall": "myuniq3131id:block/sapphire_block"
-  }
-}

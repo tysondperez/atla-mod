@@ -1,8 +1,0 @@
-// 1.20.1	2024-07-12T14:37:16.6491574	Tags for minecraft:block mod id myuniq3131id
-506ac1772cb93e8b3bd223c23d6ce83a69d7f393 data/minecraft/tags/blocks/fences.json
-f7cceee465ff536dc34332455996de22b78f3d70 data/minecraft/tags/blocks/fence_gates.json
-8911968a628cb1df8cdad64df47519f28decf73a data/minecraft/tags/blocks/mineable/pickaxe.json
-443b58b924ebf09f2998569c32bcf8ded81111a7 data/minecraft/tags/blocks/needs_stone_tool.json
-0916729561daafefa252ab6530dd70319bb8a861 data/minecraft/tags/blocks/walls.json
-2183e01b57283a780a0500db2eaa5d7df8e92513 data/myuniq3131id/tags/blocks/metal_detector_valuables.json
-02f84fa85963ebd1e5fdfbfdbf0b5d967d265b09 data/myuniq3131id/tags/blocks/needs_sapphire_tool.json

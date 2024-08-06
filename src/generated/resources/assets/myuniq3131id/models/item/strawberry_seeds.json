@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "myuniq3131id:item/strawberry_seeds"
-  }
-}
