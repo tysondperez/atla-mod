@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "mcatlamod:big_saddle"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "minecraft:saddle"
+  }
+}
